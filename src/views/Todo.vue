@@ -2,10 +2,10 @@
   <div class="home">
     <v-list class="pt-0" flat>
       <div v-for="task in tasks" :key="task.id">
-        <v-list-item>
-          <template v-slot:default="{ active }">
+        <v-list-item @click="doneTask(task.id)">
+          <template v-slot:default>
             <v-list-item-action>
-              <v-checkbox :input-value="active" color="primary"></v-checkbox>
+              <v-checkbox :input-value="task.done" color="primary"></v-checkbox>
             </v-list-item-action>
 
             <v-list-item-content>
@@ -42,6 +42,12 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    doneTask(id) {
+      let task = this.tasks.filter(task => task.id === id)[0]
+      task.done = ! task.done
+    }
   },
 };
 </script>
